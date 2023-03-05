@@ -26,7 +26,10 @@ class UserServiceImpl : UserServiceAPI, GenericServiceImpl<User, Long>() {
     }
 
     override fun deleteUserByNick(nick: String) {
-        deleteOne(getUserByNick(nick)?.takeIf { it.isNotEmpty() }?.first {it.nick == nick}?.id!!)
+        if (!getUserByNick(nick).isNullOrEmpty()){
+            deleteOne(getUserByNick(nick)?.takeIf { it.isNotEmpty() }?.first {it.nick == nick}?.id!!)
+        }
+
     }
 
 
