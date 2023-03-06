@@ -17,13 +17,13 @@ class SessionsController {
     @Autowired
     lateinit var sessionService: SesionServiceAPI;
 
-    @GetMapping()
+    @GetMapping
     fun getAllSessions(): ResponseEntity<List<Session>> {
         val sessions = sessionService.getAllSessions(sessionService.all)
         return ResponseEntity.ok(sessions)
     }
 
-    @GetMapping("/sincetoday")
+    @GetMapping("/allsessionssincetoday")
     fun getAllSessionsSinceToday(): ResponseEntity<List<Session>> {
         val sessions = sessionService.getFutureSessions(sessionService.all)
         return if (sessions.isNotEmpty()){
@@ -33,7 +33,7 @@ class SessionsController {
         }
     }
 
-    @GetMapping("/today")
+    @GetMapping("/allsessionstoday")
     fun getAllSessionsOfToday(): ResponseEntity<List<Session>> {
         val sessions = sessionService.getTodaySessions(sessionService.all)
         return if (sessions.isNotEmpty()){

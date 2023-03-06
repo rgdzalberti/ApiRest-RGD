@@ -14,7 +14,7 @@ class MoviesController {
     @Autowired
     lateinit var moviesService: MovieServiceImpl;
 
-    @GetMapping()
+    @GetMapping
     fun getAllMovies(): ResponseEntity<List<Movie>?> {
         var movies = moviesService.all
         return ResponseEntity.ok(movies)
