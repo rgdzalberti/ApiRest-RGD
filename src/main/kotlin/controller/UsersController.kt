@@ -39,7 +39,7 @@ class UsersController {
         return ResponseEntity(HttpStatus.CREATED)
     }
 
-    @PutMapping("{nick}")
+    @PutMapping("/{nick}")
     fun updateUser(@PathVariable("nick") nick: String, @RequestBody request: UserDTO): ResponseEntity<Void?>? {
         if (userService.updateUser(nick,User(request.nick,request.email,request.profilePicture,null))) {
             return ResponseEntity(HttpStatus.OK)
@@ -50,8 +50,11 @@ class UsersController {
 
     @DeleteMapping("/{nick}")
     fun deleteUser(@PathVariable nick: String): ResponseEntity<Void> {
-        userService.deleteUserByNick(nick)
-        return ResponseEntity.ok().build()
+
+        if (userService.deleteUserByNick(nick)){
+            return ResponseEntity.ok().build()
+        } else return ResponseEntity.notFound().build()
+
     }
 
 

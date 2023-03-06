@@ -7,7 +7,7 @@ interface UserServiceAPI : GenericServiceAPI<User, Long> {
 
    fun insertUser(user: User)
    fun getUserByNick(nick: String): List<User>?
-   fun deleteUserByNick(nick: String)
+   fun deleteUserByNick(nick: String):Boolean
    fun updateUser(nick: String,user: User):Boolean
 
 }

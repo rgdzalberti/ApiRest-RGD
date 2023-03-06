@@ -25,10 +25,13 @@ class UserServiceImpl : UserServiceAPI, GenericServiceImpl<User, Long>() {
         return userRepository.findByNick(nick)
     }
 
-    override fun deleteUserByNick(nick: String) {
-        if (!getUserByNick(nick).isNullOrEmpty()){
-            deleteOne(getUserByNick(nick)?.takeIf { it.isNotEmpty() }?.first {it.nick == nick}?.id!!)
-        }
+    override fun deleteUserByNick(nick: String): Boolean {
+        val user = getUserByNick(nick)
+
+        if (!user.isNullOrEmpty()){
+            deleteOne(user.first().id!!)
+            return true
+        } else return false
 
     }
 
